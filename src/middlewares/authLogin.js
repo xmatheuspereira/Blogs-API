@@ -10,9 +10,9 @@ module.exports = {
       .json({ message: 'Some required fields are missing' });
     }
     const user = await loginService.login(email, password);
-      if (user === null) {
-        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid fields' });
-      }
+    if (!user) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid fields' });
+    }
     next();
   },
 };

@@ -1,4 +1,4 @@
-const BlogPost = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const BlogPost = sequelize.define('BlogPost', {
     id: {
       primaryKey: true,
@@ -24,5 +24,3 @@ const BlogPost = (sequelize, DataTypes) => {
 
   return BlogPost;
 }
-
-module.exports = BlogPost;

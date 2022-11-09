@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { User } = require('../models/User');
+const db = require('../models');
 const JWT = require('../utils/JWT');
 
 const loginSchema = Joi.object({
@@ -12,7 +12,7 @@ module.exports = {
     const { error } = loginSchema.validate({ email, password });
     if (error) return null;
 
-    const getUser = await User.findOne({ where: { email, password } });
+    const getUser = await db.User.findOne({ where: { email } });
     if (!getUser) return null;
     
     const token = JWT.createToken(email);
