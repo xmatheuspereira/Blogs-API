@@ -9,6 +9,7 @@ module.exports = {
       const user = await loginService.login(email, password);
       return res.status(StatusCodes.OK).json({ token: user });
     } catch (err) {
+      console.log(err);
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
         .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
     }
