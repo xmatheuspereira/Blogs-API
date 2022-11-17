@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+const { StatusCodes } = require('http-status-codes');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
@@ -15,9 +17,7 @@ module.exports = {
       const { data } = jwt.verify(token, process.env.JWT_SECRET);
       return data;
     } catch (_err) {
-      const error = new Error({ message: 'Expired or invalid token' });
-      error.code = 'Unauthorized';
-      throw error.message;
+      return null;
     }
   },
 };

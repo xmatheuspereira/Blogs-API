@@ -4,7 +4,6 @@ const routerUser = require('./routers/routerUser');
 // ...
 
 const app = express();
-
 app.use(express.json());
 app.use('/login', routerLogin);
 app.use('/user', routerUser);

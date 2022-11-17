@@ -19,4 +19,15 @@ module.exports = {
         .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
     }
   },
+
+  getUsers: async (_req, res) => {
+    try {
+      const getUsers = await userService.getUsers();
+      return res.status(StatusCodes.OK).json(getUsers);
+    } catch (err) {
+      console.log(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    }
+  },
 };
