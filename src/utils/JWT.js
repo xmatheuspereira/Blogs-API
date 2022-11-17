@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const { StatusCodes } = require('http-status-codes');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
