@@ -34,9 +34,13 @@ module.exports = {
     const getUsers = await db.User.findAll({
       attributes: { exclude: ['password'] },
     });
+    return getUsers;
+  },
 
-    // if (!getUsers) return null;
-
+  getUserById: async () => {
+    const getUsers = await db.User.findByPk({
+      attributes: { exclude: ['password'] },
+    });
     return getUsers;
   },
 };
