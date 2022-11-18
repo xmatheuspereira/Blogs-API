@@ -2,6 +2,7 @@ const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const userService = require('../services/userService');
 
 module.exports = {
+
   addUser: async (req, res) => {
     const { displayName, email, password, image } = req.body;
     try {
@@ -39,6 +40,19 @@ module.exports = {
         return res.status(StatusCodes.NOT_FOUND).json({ message: 'User does not exist' });
       }
       return res.status(StatusCodes.OK).json(getUserById);
+    } catch (err) {
+      console.log(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    }
+  },
+
+  deleteUser: async (req, res) => {
+    const token = req.user;
+    try {
+      await userService.deleteUser(token);
+
+      return res.status(StatusCodes.NO_CONTENT).end();
     } catch (err) {
       console.log(err);
       return res.status(StatusCodes.INTERNAL_SERVER_ERROR)

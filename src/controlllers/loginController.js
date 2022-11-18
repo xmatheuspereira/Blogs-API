@@ -3,6 +3,7 @@ const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 const loginService = require('../services/loginService');
 
 module.exports = {
+
   login: async (req, res) => {
     const { email, password } = req.body;
     try {

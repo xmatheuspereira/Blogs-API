@@ -40,4 +40,12 @@ module.exports = {
     const getUserById = await db.User.findByPk(pk, { attributes: { exclude: ['password'] } });
     return getUserById;
   },
+
+  deleteUser: async (email, token) => {
+    const checkToken = JWT.isValidToken(token);
+
+    if (checkToken) {
+      await db.User.destroy({ where: { email } });
+    }
+  },
 };

@@ -8,6 +8,7 @@ routerUser
           .post('/', userController.addUser)
           .use(authToken)
           .get('/', userController.getUsers)
-          .get('/:id', userController.getUserById);
+          .get('/:id', userController.getUserById)
+          .delete('/me', userController.deleteUser);
 
 module.exports = routerUser;
