@@ -5,6 +5,7 @@ const { authToken } = require('../middlewares/authToken');
 const routerCategories = Router();
 
 routerCategories.use(authToken)
-                .post('/', categoriesController.createCategory);
+                .post('/', categoriesController.createCategory)
+                .get('/', categoriesController.getCategories);
 
 module.exports = routerCategories;

@@ -18,4 +18,15 @@ module.exports = {
         .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
     }
   },
+
+  getCategories: async (_req, res) => {
+    try {
+      const getCategories = await categoriesService.getCategories();
+      return res.status(StatusCodes.OK).json(getCategories);
+    } catch (err) {
+      console.log(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    }
+  },
 };

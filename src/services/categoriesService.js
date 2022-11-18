@@ -19,4 +19,9 @@ module.exports = {
     const category = db.Category.create(name);
     return category;
   },
+
+  getCategories: async () => {
+    const getCategories = await db.Category.findAll();
+    return getCategories;
+  },
 };
