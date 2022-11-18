@@ -31,16 +31,13 @@ module.exports = {
   },
 
   getUsers: async () => {
-    const getUsers = await db.User.findAll({
-      attributes: { exclude: ['password'] },
-    });
+    const getUsers = await db.User.findAll({ attributes: { exclude: ['password'] } });
     return getUsers;
   },
 
-  getUserById: async () => {
-    const getUsers = await db.User.findByPk({
-      attributes: { exclude: ['password'] },
-    });
-    return getUsers;
+  getUserById: async (id) => {
+    const pk = id.replace(':', '');
+    const getUserById = await db.User.findByPk(pk, { attributes: { exclude: ['password'] } });
+    return getUserById;
   },
 };
