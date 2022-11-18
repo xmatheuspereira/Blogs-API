@@ -48,9 +48,9 @@ module.exports = {
   },
 
   deleteUser: async (req, res) => {
-    const token = req.user;
+    const email = req.body;
     try {
-      await userService.deleteUser(token);
+      await userService.deleteUser(email);
 
       return res.status(StatusCodes.NO_CONTENT).end();
     } catch (err) {

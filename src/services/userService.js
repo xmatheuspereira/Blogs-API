@@ -41,8 +41,8 @@ module.exports = {
     return getUserById;
   },
 
-  deleteUser: async (email, token) => {
-    const checkToken = JWT.isValidToken(token);
+  deleteUser: async (email) => {
+    const checkToken = JWT.isValidToken(email);
 
     if (checkToken) {
       await db.User.destroy({ where: { email } });
