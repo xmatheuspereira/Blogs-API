@@ -7,10 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     title: DataTypes.STRING,
     content: DataTypes.TEXT,
-    user_id: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   }, {
+    underscored: true,
     timestamps: false,
     tableName: 'blog_posts',
   });
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {
       foreignKey: 'id',
-      as: 'users',
+      as: 'user',
     })
   }
 
