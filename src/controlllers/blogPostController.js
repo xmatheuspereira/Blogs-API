@@ -13,4 +13,20 @@ module.exports = {
         .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
     }
   },
+
+  getPostById: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const getPostById = await blogPostService.getPostById(id);
+      if (!getPostById) {
+        return res.status(StatusCodes.NOT_FOUND).json({ message: 'Post does not exist' });
+      }
+      return res.status(StatusCodes.OK).json(getPostById);
+    } catch (err) {
+      console.log(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    }
+  },
 };

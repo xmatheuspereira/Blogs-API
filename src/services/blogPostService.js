@@ -6,8 +6,22 @@ module.exports = {
     const getPosts = await db.BlogPost.findAll({ 
       include: [
         { model: db.User, as: 'user', attributes: { exclude: ['password'] } },
-        { model: db.Category, as: 'categories', attributes: ['id', 'name'] },
+        { model: db.Category, as: 'categories' },
     ] });
     return getPosts;
+  },
+
+  getPostById: async (id) => {
+    const getPostById = await db.BlogPost.findByPk(
+      id, {
+      include: [
+        { model: db.User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: db.Category, as: 'categories' }, 
+      ] },
+    );
+
+    if (!getPostById) return null;
+
+    return getPostById;
   },
 };

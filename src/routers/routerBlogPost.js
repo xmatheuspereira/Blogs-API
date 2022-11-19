@@ -5,6 +5,7 @@ const { authToken } = require('../middlewares/authToken');
 const routerBlogPost = Router();
 
 routerBlogPost.use(authToken)
-              .get('/', blogPostController.getPosts);
+              .get('/', blogPostController.getPosts)
+              .get('/:id', blogPostController.getPostById);
 
 module.exports = routerBlogPost;
