@@ -19,8 +19,8 @@ module.exports = {
 
     const { dataValues } = await db.User.findOne({ where: { email } }, { transaction: t });
     const { id } = dataValues;
+
     const post = await db.BlogPost.create({ title, content, userId: id }, { transaction: t });
-    console.log('+++++++++++++++++++', post.dataValues);
 
     await Promise.all(categoryIds.map(
       (categoryId) => db.PostCategory.create({ postId: post.dataValues.id, categoryId },
@@ -46,15 +46,6 @@ module.exports = {
   deletePost: async (id) => {
     const getPost = await db.BlogPost.findByPk(id);
     if (!getPost) return null;
-
-    // const isThePostOwner = await module.exports.getPostById(id);
-    // console.log('Email:', isThePostOwner.user.email);
-    // console.log('Email do req:', email);
-    // console.log(isThePostOwner.user.email !== email);
-
-    // if (isThePostOwner.user.email !== email) {
-    //   return undefined;
-    // }
 
     const deletePost = await db.BlogPost.destroy({ where: { id } });
     return deletePost;
