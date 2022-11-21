@@ -9,8 +9,9 @@ module.exports = {
       if (!authorization) {
         return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token not found' });
       }
-      
+
       const isValidToken = JWT.isValidToken(authorization);
+      req.user = isValidToken;
 
       if (!isValidToken) {
         return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Expired or invalid token' });

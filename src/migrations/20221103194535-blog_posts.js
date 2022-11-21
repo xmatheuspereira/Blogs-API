@@ -22,10 +22,12 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       published: {
+        defaultValue: new Date(),
         allowNull: false,
         type: Sequelize.DATE,
       },
       updated: {
+        defaultValue: new Date(),
         allowNull: false,
         type: Sequelize.DATE,
       }
