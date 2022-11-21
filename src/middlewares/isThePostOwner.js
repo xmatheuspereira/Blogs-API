@@ -1,29 +1,17 @@
 const { StatusCodes } = require('http-status-codes');
-// const userService = require('../services/userService');
-// const db = require('../models');
-const JWT = require('../utils/JWT');
+const blogPostService = require('../services/blogPostService');
+const db = require('../models');
 
 module.exports = {
 
   isThePostOwner: async (req, res, next) => {
-    // const { id } = req.params;
-    const { authorization } = req.headers;
+    const { id } = req.params;
     const email = req.user;
-    try {
-      // const { dataValues } = await db.BlogPost.findOne({ where: { id } });
-      // const { userId } = dataValues;
-
-      // const user = await userService.getUserById(String(userId));
-      const isValidToken = JWT.isValidToken(authorization);
-      console.log('isValidToken===================', isValidToken);
-      console.log('Email===============', email);
-  
-      if (email !== isValidToken) {
+    const isThePostOwner = await blogPostService.getPostById(Number(id));
+    const user = await db.User.findOne({ where: { email } });
+      if (isThePostOwner !== null && isThePostOwner.userId !== user.id) {
         return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Unauthorized user' });
       }
-      next();
-    } catch (error) {
-      console.log(error);
-    }
+    next();
   },
 };
