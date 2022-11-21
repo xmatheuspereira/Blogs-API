@@ -63,4 +63,16 @@ module.exports = {
         .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
     }
   },
+
+  getSearch: async (req, res) => {
+    const { q } = req.query;
+    try {
+      const result = await blogPostService.getSearch(q);
+      return res.status(StatusCodes.OK).json(result);
+    } catch (err) {
+      console.log(err);
+      return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json(ReasonPhrases.INTERNAL_SERVER_ERROR);
+    }
+  },
 };

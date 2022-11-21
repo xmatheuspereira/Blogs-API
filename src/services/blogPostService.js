@@ -50,4 +50,22 @@ module.exports = {
     const deletePost = await db.BlogPost.destroy({ where: { id } });
     return deletePost;
   },
+
+  getSearch: async (q) => {
+    const search = await db.BlogPost.findAll({
+      where: {
+        [Sequelize.Op.or]: [
+          { title: { [Sequelize.Op.like]: `%${q}%` } },
+          { content: { [Sequelize.Op.like]: `%${q}%` } },
+        ],
+      },
+      include: [
+        { model: db.User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: db.Category, as: 'categories' },
+      ],
+      
+    });
+    
+    return search;
+  },
 };
